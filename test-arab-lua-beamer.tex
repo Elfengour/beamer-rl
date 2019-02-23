@@ -1,0 +1,212 @@
+\PassOptionsToPackage{unicode}{hyperref}
+\documentclass{beamer}
+
+\usepackage[nil,bidi=basic-r]{babel}
+\babelprovide[import=ar-DZ, main]{arabic}
+\babelfont{rm}{Amiri}
+\babelfont{sf}{Amiri}
+
+
+
+\usepackage{lua-rl-beamer}
+
+% Themes without Navigation Bars
+%\mode<presentation>{\usetheme{default}}
+%\mode<presentation>{\usetheme{boxes}}
+%\mode<presentation>{\usetheme{Bergen}}
+%\mode<presentation>{\usetheme{Boadilla}}
+%\mode<presentation>{\usetheme{Madrid}}
+%\mode<presentation>{\usetheme{AnnArbor}}
+%\mode<presentation>{\usetheme{CambridgeUS}}
+%\mode<presentation>{\usetheme{EastLansing}}
+%\mode<presentation>{\usetheme{Pittsburgh}}
+%\mode<presentation>{\usetheme{Rochester}}
+
+% Themes with a Tree-Like Navigation Bar
+%\mode<presentation>{\usetheme{Antibes}}
+%\mode<presentation>{\usetheme{JuanLesPins}}
+%\mode<presentation>{\usetheme{Montpellier}}
+
+% Themes with a Table of Contents Sidebar
+%\mode<presentation>{\usetheme{Berkeley}}
+%\mode<presentation>{\usetheme{PaloAlto}}
+%\mode<presentation>{\usetheme{Goettingen}}
+%\mode<presentation>{\usetheme{Hannover}}
+
+% Themes with a Mini Frame Navigation
+%\mode<presentation>{\usetheme{Berlin}}
+%\mode<presentation>{\usetheme{Ilmenau}}
+%\mode<presentation>{\usetheme{Dresden}}
+%\mode<presentation>{\usetheme{Darmstadt}}
+%\mode<presentation>{\usetheme{Frankfurt}}
+%\mode<presentation>{\usetheme{Singapore}}
+%\mode<presentation>{\usetheme{Szeged}}
+
+% Themes with Section and Subsection Tables
+%\mode<presentation>{\usetheme{Copenhagen}}
+%\mode<presentation>{\usetheme{Luebeck}}
+%\mode<presentation>{\usetheme{Malmoe}}
+%s\mode<presentation>{\usetheme{Warsaw}}
+
+
+\title{ميكانيكا}
+
+\author{From Wikipedia}
+\date{\today}
+
+
+\setbeamertemplate{bibliography item}[triangle]
+\setbeamercovered{transparent=10}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{\contentsname}
+\tableofcontents
+\end{frame}
+
+\section{تطبيقية}
+
+\begin{frame}
+\frametitle{أقسام}
+\begin{itemize}
+\item فيزياء تطبيقية
+\item فيزياء تجريبية
+\item فيزياء نظرية
+\end{itemize}
+
+
+
+\end{frame}
+
+\section{طاقة, حركة}
+
+\begin{frame}
+\frametitle{طاقة, حركة}
+\begin{itemize}
+\item ديناميكا حرارية
+\item ميكانيكا
+\begin{itemize}
+\item كلاسيكية
+\begin{itemize}
+\item لاغرانج
+\item هاملتوني
+\end{itemize}
+\item المتصل
+\item سماوية
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{طاقة, حركة}
+\begin{enumerate}
+\item ديناميكا حرارية
+\item ميكانيكا
+\begin{enumerate}
+\item كلاسيكية
+\begin{enumerate}
+\item لاغرانج
+\item هاملتوني
+\end{enumerate}
+\item المتصل
+\item سماوية
+\end{enumerate}
+\end{enumerate}
+
+\begin{figure}
+\centering
+\rule{2cm}{2cm}
+\caption{عنوان الصورة}
+\end{figure}
+
+
+\end{frame}
+
+
+\section{Blocks}
+
+\subsection{text in subsection}
+\subsubsection{text in subsubsection}
+
+\begin{frame}
+\frametitle{Blocks}
+
+
+\begin{block}{Lorem}
+  \foreignlanguage*{nil}{On 21 April 1820, during a lecture, Ørsted
+  noticed a compass\cite{Dijkstra1982} needle deflected from magnetic north when an
+  electric current from a battery was switched on and off.}
+\end{block}
+
+
+\begin{block}{أورستد}
+  لاحظ هانز أورستد في 21 أبريل 1820 وهو يُعد أحد التجارب أن إبرة
+  البوصلة تنحرف عن اتجاهها نحو الشمال عندما كان يغلق ويفتح التيار في
+  دائرة كهربائية يُعدها.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{columns}
+\begin{columns}[t]
+\begin{column}{5cm}
+نص عربي طويل من اليمين لليسار، مكتوب على سطرين.
+\end{column}
+\begin{column}{5cm}
+\babelsublr{One line (but aligned).}
+\end{column}
+\end{columns}
+
+\bigskip
+
+\begin{columns}[b]
+\begin{column}{5cm}
+نص عربي طويل من اليمين لليسار، مكتوب على سطرين.
+\end{column}
+\begin{column}{5cm}
+\babelsublr{One line (but aligned).}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Theorems}
+
+\framesubtitle{The proof uses \textit{reductio ad absurdum}.}
+\begin{theorem}
+There is no largest prime number.
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[<+-| alert@+>]
+\item Suppose $p$ were the largest prime number.
+\item Let $q$ be the product of the first $p$ numbers.
+\item Then $q+1$ is not divisible by any of them.
+\item But $q + 1$ is greater than $1$, thus divisible by some prime
+number not in the first $p$ numbers.\qedhere
+\end{enumerate}
+\end{proof}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{For Further Reading}
+\begin{thebibliography}{Dijkstra, 1982}
+\bibitem[Salomaa, 1973]{Salomaa1973}
+A.~Salomaa.
+\newblock {\em Formal Languages}.
+\newblock Academic Press, 1973.
+\bibitem[Dijkstra, 1982]{Dijkstra1982}
+E.~Dijkstra.
+\newblock Smoothsort, an alternative for sorting in situ.
+\newblock {\em Science of Computer Programming}, 1(3):223--233, 1982.
+\end{thebibliography}
+\end{frame}
+
+
+\end{document}
