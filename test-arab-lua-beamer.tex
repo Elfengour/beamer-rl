@@ -1,8 +1,8 @@
-\PassOptionsToPackage{unicode}{hyperref}
-\documentclass{beamer}
+\documentclass[hyperref=unicode]{beamer}
 
 \usepackage[nil,bidi=basic-r]{babel}
 \babelprovide[import=ar-DZ, main]{arabic}
+\babelprovide{english}
 \babelfont{rm}{Amiri}
 \babelfont{sf}{Amiri}
 
@@ -45,8 +45,8 @@
 % Themes with Section and Subsection Tables
 %\mode<presentation>{\usetheme{Copenhagen}}
 %\mode<presentation>{\usetheme{Luebeck}}
-%\mode<presentation>{\usetheme{Malmoe}}
-%s\mode<presentation>{\usetheme{Warsaw}}
+\mode<presentation>{\usetheme{Malmoe}}
+%\mode<presentation>{\usetheme{Warsaw}}
 
 
 \title{ميكانيكا}
@@ -54,7 +54,9 @@
 \author{From Wikipedia}
 \date{\today}
 
-
+\setbeamertemplate{itemize item}[ball]
+\setbeamertemplate{itemize subitem}[ball]
+\setbeamertemplate{itemize subsubitem}[ball]
 \setbeamertemplate{bibliography item}[triangle]
 \setbeamercovered{transparent=10}
 
@@ -193,6 +195,32 @@ number not in the first $p$ numbers.\qedhere
 
 \end{frame}
 
+
+
+\begin{frame}[fragile]
+
+\frametitle{Verbatim text.}
+
+\selectlanguage{english}
+
+\begin{verbatim}
+int main (void)
+{
+std::vector<bool> is_prime (100, true);
+for (int i = 2; i < 100; i++)
+if (is_prime[i])
+{
+std::cout << i << " ";
+for (int j = i; j < 100; is_prime [j] = false, j+=i);
+}
+return 0;
+}
+\end{verbatim}
+\begin{uncoverenv}<2>
+Note the use of \verb|std::|.
+\end{uncoverenv}
+
+\end{frame}
 
 \begin{frame}
 \frametitle{For Further Reading}
