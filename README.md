@@ -1,2 +1,2 @@
 # lua-rl-beamer
-Patches  for some internal beamer commands for  right to left  presentations using luatex (babel)                                         
+Patches  for some internal beamer commands and templates for  right to left  presentations using luatex (babel)                                         
