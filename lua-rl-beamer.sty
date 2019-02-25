@@ -296,4 +296,101 @@
 \redefbeamertemplate*{enumerate subitem}{default}{\insertenumlabel\hbox{.}\insertsubenumlabel}
 \redefbeamertemplate*{enumerate subsubitem}{default}{\insertenumlabel\hbox{.}\insertsubenumlabel\hbox{.}\insertsubsubenumlabel}
 
-%% beamerouterthemeshadow
+%% beamerinnerthemedefault
+
+\redefbeamertemplate*{button}{default}
+{%
+	\setbox\beamer@tempbox=\hbox{{\insertbuttontext}}%
+	\ht\beamer@tempbox=6pt%
+	\dp\beamer@tempbox=0pt%
+	\setbox\beamer@tempbox=\vbox{\box\beamer@tempbox\vskip2pt}%
+	\beamer@tempdim=\wd\beamer@tempbox%
+	\beamer@dima=\beamer@tempdim\advance\beamer@dima by2.2pt
+	\beamer@dimb=\beamer@tempdim\advance\beamer@dimb by4pt
+	\textdir TLT\begin{pgfpicture}{-4pt}{0pt}{\the\beamer@tempdim}{8pt}
+		\color{bg}
+		\pgfsetlinewidth{0.8pt}
+		\pgfpathqmoveto{0pt}{0pt}
+		\pgfpathqcurveto{-2.2pt}{0pt}{-4pt}{1.8pt}{-4pt}{4pt}
+		\pgfpathqcurveto{-4pt}{6.2pt}{-2.2pt}{8pt}{0pt}{8pt}
+		\pgfpathlineto{\pgfpoint{\the\beamer@tempdim}{8pt}}
+		\pgfpathcurveto%
+		{\pgfpoint{\the\beamer@dima}{8pt}}%
+		{\pgfpoint{\the\beamer@dimb}{6.2pt}}%
+		{\pgfpoint{\the\beamer@dimb}{4pt}}
+		\pgfpathcurveto%
+		{\pgfpoint{\the\beamer@dimb}{1.8pt}}%
+		{\pgfpoint{\the\beamer@dima}{0pt}}%
+		{\pgfpoint{\the\beamer@tempdim}{0pt}}
+		\pgfpathclose
+		\pgfusepathqfill
+		\colorlet{bg}{parent.bg}
+		\usebeamercolor[fg]{button border}
+		\pgfpathqmoveto{0pt}{0pt}
+		\pgfpathqcurveto{-2.2pt}{0pt}{-4pt}{1.8pt}{-4pt}{4pt}
+		\pgfpathqcurveto{-4pt}{6.2pt}{-2.2pt}{8pt}{0pt}{8pt}
+		\pgfpathlineto{\pgfpoint{\the\beamer@tempdim}{8pt}}
+		\pgfpathcurveto%
+		{\pgfpoint{\the\beamer@dima}{8pt}}%
+		{\pgfpoint{\the\beamer@dimb}{6.2pt}}%
+		{\pgfpoint{\the\beamer@dimb}{4pt}}
+		\pgfpathcurveto%
+		{\pgfpoint{\the\beamer@dimb}{1.8pt}}%
+		{\pgfpoint{\the\beamer@dima}{0pt}}%
+		{\pgfpoint{\the\beamer@tempdim}{0pt}}
+		\pgfpathclose
+		\pgfusepathqstroke
+	\end{pgfpicture}%
+	\hskip-\beamer@tempdim%
+	\box\beamer@tempbox%
+	\kern4pt%
+}
+
+
+%% beamerbasenavigation
+
+% User Buttons
+
+\pgfdefobject{beamergotosymbol}{\pgfpoint{0pt}{-1pt}}{\pgfpoint{5pt}{5pt}}
+{
+	\pgfpathqmoveto{3.5bp}{0.5bp}
+	\pgfpathqlineto{1.5bp}{2bp}
+	\pgfpathqlineto{3.5bp}{3.5bp}
+	\pgfusepathqfill
+}
+
+
+\def\insertgotosymbol{%
+\begin{pgfpicture}{-1pt}{0pt}{4pt}{5pt}
+		\pgfuseobject{beamergotosymbol}%
+\end{pgfpicture}}
+
+\pgfdefobject{beamerskipsymbol}{\pgfpoint{0pt}{-1pt}}{\pgfpoint{7pt}{5pt}}
+{
+	\pgfpathqmoveto{3.5bp}{0.5bp}
+	\pgfpathqlineto{1.5bp}{2bp}
+	\pgfpathqlineto{3.5bp}{3.5bp}
+	\pgfpathqmoveto{5.5bp}{0.5bp}
+	\pgfpathqlineto{3.5bp}{2bp}
+	\pgfpathqlineto{5.5bp}{3.5bp}
+	\pgfusepathqfill
+}
+
+\def\insertskipsymbol{%
+	\begin{pgfpicture}{-1pt}{0pt}{8pt}{5pt}
+		\pgfuseobject{beamerskipsymbol}%
+\end{pgfpicture}}
+
+
+\pgfdefobject{beamerreturnsymbol}{\pgfpoint{0pt}{-1pt}}{\pgfpoint{5pt}{5pt}}
+{
+	\pgfpathqmoveto{1.5bp}{0.5bp}
+	\pgfpathqlineto{3.5bp}{2bp}
+	\pgfpathqlineto{1.5bp}{3.5bp}
+	\pgfusepathqfill
+}
+
+\def\insertreturnsymbol{%
+	\begin{pgfpicture}{-1pt}{0pt}{6pt}{5pt}
+		\pgfuseobject{beamerreturnsymbol}%
+\end{pgfpicture}}
