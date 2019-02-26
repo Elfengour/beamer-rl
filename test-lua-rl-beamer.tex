@@ -7,6 +7,7 @@
 
 
 
+
 \usepackage{lua-rl-beamer}
 
 % Themes without Navigation Bars
@@ -53,11 +54,13 @@
 \author{From Wikipedia}
 \date{\today}
 
+
 %\setbeamertemplate{section in toc}[ball unnumbered]
 %\setbeamertemplate{itemize subitem}[ball]
 %\setbeamertemplate{itemize subsubitem}[ball]
 %\setbeamertemplate{bibliography item}[triangle]
 \setbeamercovered{transparent=10}
+\newtheorem*{thm}{نظرية.}
 
 \begin{document}
 
@@ -84,7 +87,7 @@
 
 \end{frame}
 
-\section{طاقة, حركة}
+\section{طاقة، حركة}
 
 \begin{frame}
 \frametitle{طاقة، حركة}
@@ -179,9 +182,9 @@
 \frametitle{Theorems}
 
 \framesubtitle{The proof uses \textit{reductio ad absurdum}.}
-\begin{theorem}
+\begin{thm}
 There is no largest prime number.
-\end{theorem}
+\end{thm}
 \begin{proof}
 \begin{enumerate}[<+-| alert@+>]
 \item Suppose $p$ were the largest prime number.
@@ -231,6 +234,15 @@ Note the use of \verb|std::|.
 \hyperlink{jumptosecond}{\beamergotobutton{الرجوع إلى الشريحة الثانية}}
 \hypertarget<2>{jumptosecond}{}
 \end{frame}
+\begin{frame}
+\frametitle{zooming}
+
+\framezoom<1><2>[border=2](2cm,2cm)(2cm,2cm)
+\pgfimage[height=5cm]{example-image}
+
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Bibliography}
