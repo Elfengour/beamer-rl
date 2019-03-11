@@ -1,7 +1,9 @@
 \documentclass[hyperref=unicode]{beamer}
+\usepackage{hologo} % pdflatex, xelatex, lualatex logos 
 
 \usepackage[nil,bidi=basic-r]{babel}
 \babelprovide[import=ar-DZ, main]{arabic}
+\babelprovide[import,language=Default]{english}
 \babelfont{rm}{Amiri}
 \babelfont{sf}{Amiri}
 
@@ -49,16 +51,19 @@
 \mode<presentation>{\usetheme{Warsaw}}
 
 
-\title{ميكانيكا}
 
-\author{From Wikipedia}
-\date{\today}
+\title{The beamer-rl package}
+
+\author{Salim Bou}
+
+\institute{%
+{\usebeamercolor[bg]{title} Repository: } https://github.com/seloumi/beamer-rl \par 
+{\usebeamercolor[bg]{title} Bug tracker: } https://github.com/seloumi/beamer-rl/issues
+}
 
 
-%\setbeamertemplate{section in toc}[ball unnumbered]
-%\setbeamertemplate{itemize subitem}[ball]
-%\setbeamertemplate{itemize subsubitem}[ball]
-%\setbeamertemplate{bibliography item}[triangle]
+\date{\selectlanguage{english}\today}
+
 \setbeamercovered{transparent=10}
 \newtheorem*{thm}{نظرية.}
 
@@ -69,28 +74,23 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{\contentsname}
+\frametitle{\selectlanguage{english}\contentsname}
 \tableofcontents
 \end{frame}
 
-\section{تطبيقية}
+\section{Introduction}
 
 \begin{frame}
-\frametitle{أقسام}
-\begin{itemize}
-\item فيزياء تطبيقية
-\item فيزياء تجريبية
-\item فيزياء نظرية
-\end{itemize}
-
+\frametitle{Introduction}
+Creating beamer presentation for  right to left language  (like arabic) using \hologo{pdfLaTeX} or \hologo{XeLaTeX} still poses many problems due to bugs not currently resolved especially for colors and hyperlinks  
 
 
 \end{frame}
 
-\section{طاقة، حركة}
+\section{How to use beamer-rl}
 
 \begin{frame}
-\frametitle{طاقة، حركة}
+\frametitle{How to use beamer-rl}
 \begin{itemize}
 \item ديناميكا حرارية
 \item ميكانيكا
@@ -132,7 +132,7 @@
 \end{frame}
 
 
-\section{Blocks}
+\section{Examples}
 
 \subsection{text in subsection}
 \subsubsection{text in subsubsection}
