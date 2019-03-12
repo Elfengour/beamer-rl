@@ -8,8 +8,6 @@
 \babelfont{sf}{Amiri}
 
 
-
-
 \usepackage{beamer-rl}
 
 % Themes without Navigation Bars
@@ -80,62 +78,44 @@
 
 \section{Introduction}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Introduction}
-Creating beamer presentation for  right to left language  (like arabic) using \hologo{pdfLaTeX} or \hologo{XeLaTeX} still poses many problems due to bugs not currently resolved especially for colors and hyperlinks  
+Creating beamer presentation for  right to left language  (like arabic) using \hologo{pdfLaTeX} or \hologo{XeLaTeX} still poses many problems due to bugs not currently resolved especially for colors and hyperlinks
+
+The \hologo{LuaTeX} team set solutions for  these issues thanks to them and to \textit{Javier Bezos} for  his works on the package \verb|babel| and \verb|bidi| writing    
 
 
 \end{frame}
 
 \section{How to use beamer-rl}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{How to use beamer-rl}
-\begin{itemize}
-\item ديناميكا حرارية
-\item ميكانيكا
-\begin{itemize}
-\item كلاسيكية
-\begin{itemize}
-\item لاغرانج
-\item هاملتوني
-\end{itemize}
-\item المتصل
-\item سماوية
-\end{itemize}
-\end{itemize}
-\end{frame}
 
-\begin{frame}
-\frametitle{طاقة، حركة}
-\begin{enumerate}
-\item ديناميكا حرارية
-\item ميكانيكا
-\begin{enumerate}
-\item كلاسيكية
-\begin{enumerate}
-\item لاغرانج
-\item هاملتوني
-\end{enumerate}
-\item المتصل
-\item سماوية
-\end{enumerate}
-\end{enumerate}
+\selectlanguage{nil}
 
-\begin{figure}
-\centering
-\rule{2cm}{2cm}
-\caption{عنوان الصورة}
-\end{figure}
+\begin{verbatim}
+\documentclass{beamer}
+\usepackage[nil,bidi=basic-r]{babel}
+\babelprovide[import=ar-DZ, main]{arabic}
+\babelfont{sf}{Amiri}
+\usepackage{beamer-rl}
+
+\mode<presentation>{\usetheme{Warsaw}}
+\begin{document}
+...
+\end{document}
+
+\end{verbatim}
+
 
 
 \end{frame}
 
 
 \section{Examples}
+\subsection{Blocks}
 
-\subsection{text in subsection}
-\subsubsection{text in subsubsection}
 
 \begin{frame}
 \frametitle{Blocks}
@@ -155,28 +135,40 @@ Creating beamer presentation for  right to left language  (like arabic) using \h
 \end{block}
 \end{frame}
 
+\subsection{enumerate, itemize}
+
 \begin{frame}
-\frametitle{columns}
-\begin{columns}[t]
-\begin{column}{5cm}
-نص عربي طويل من اليمين لليسار، مكتوب على سطرين.
-\end{column}
-\begin{column}{5cm}
-\babelsublr{One line (but aligned).}
-\end{column}
-\end{columns}
+\frametitle{enumerate, itemize}
 
-\bigskip
+\begin{enumerate}
+\item فيزياء تطبيقية
+\item فيزياء تجريبية
+\item فيزياء نظرية
+\end{enumerate}
 
-\begin{columns}[b]
-\begin{column}{5cm}
-نص عربي طويل من اليمين لليسار، مكتوب على سطرين.
-\end{column}
-\begin{column}{5cm}
-\babelsublr{One line (but aligned).}
-\end{column}
-\end{columns}
+
+\begin{itemize}
+\item فيزياء تطبيقية
+\item فيزياء تجريبية
+\item فيزياء نظرية
+\end{itemize}
 \end{frame}
+
+\subsection{hyperlinks}
+
+\begin{frame}
+\frametitle{hyperlinks}
+\begin{itemize}
+\item<1-> First item.
+\item<2-> Second item.
+\item<3-> Third item.
+\end{itemize}
+\hyperlink{jumptosecond}{\beamergotobutton{الرجوع إلى الشريحة الثانية}}
+\hypertarget<2>{jumptosecond}{}
+\end{frame}
+
+
+\subsection{Theorems}
 
 \begin{frame}
 \frametitle{Theorems}
@@ -197,65 +189,14 @@ number not in the first $p$ numbers.\qedhere
 
 \end{frame}
 
+\subsection{zooming}
 
-
-\begin{frame}[fragile]
-
-\frametitle{Verbatim text.}
-
-\selectlanguage{nil}
-
-\begin{verbatim}
-int main (void)
-{
-std::vector<bool> is_prime (100, true);
-for (int i = 2; i < 100; i++)
-if (is_prime[i])
-{
-std::cout << i << " ";
-for (int j = i; j < 100; is_prime [j] = false, j+=i);
-}
-return 0;
-}
-\end{verbatim}
-\begin{uncoverenv}<2>
-Note the use of \verb|std::|.
-\end{uncoverenv}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{hyperlink}
-\begin{itemize}
-\item<1-> First item.
-\item<2-> Second item.
-\item<3-> Third item.
-\end{itemize}
-\hyperlink{jumptosecond}{\beamergotobutton{الرجوع إلى الشريحة الثانية}}
-\hypertarget<2>{jumptosecond}{}
-\end{frame}
 \begin{frame}
 \frametitle{zooming}
 
 \framezoom<1><2>[border=2](2cm,2cm)(2cm,2cm)
 \pgfimage[height=5cm]{example-image}
 
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Bibliography}
-\begin{thebibliography}{Dijkstra, 1982}
-\bibitem[Salomaa, 1973]{Salomaa1973}
-A.~Salomaa.
-\newblock {\em Formal Languages}.
-\newblock Academic Press, 1973.
-\bibitem[Dijkstra, 1982]{Dijkstra1982}
-E.~Dijkstra.
-\newblock Smoothsort, an alternative for sorting in situ.
-\newblock {\em Science of Computer Programming}, 1(3):223--233, 1982.
-\end{thebibliography}
 \end{frame}
 
 
