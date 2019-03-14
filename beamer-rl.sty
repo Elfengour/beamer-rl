@@ -1,4 +1,6 @@
-
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beamer-rl}
+[2019/03/14 v1.0 LaTeX package to patchs beamer for right to left presentation]
 
 \def\reset@temp#1#2{\expandafter\let\csname beamer@@tmpop@#1@#2\endcsname\relax}
 \def\@@defbeamertemplate#1#2{\reset@temp{#1}{#2}\defbeamertemplate{#1}{#2}}
@@ -496,3 +498,4 @@
 	}%
 }
 
+\endinput
