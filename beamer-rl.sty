@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamer-rl}
-[2019/03/14 v1.0 LaTeX package to patchs beamer for right to left presentation]
+[2019/03/28 v1.1 LaTeX package to patch beamer for right to left presentation]
 
 \def\reset@temp#1#2{\expandafter\let\csname beamer@@tmpop@#1@#2\endcsname\relax}
 \def\@@defbeamertemplate#1#2{\reset@temp{#1}{#2}\defbeamertemplate{#1}{#2}}
@@ -10,17 +10,17 @@
 	\@ifstar{\@defbeamertemplate}{\@@defbeamertemplate}%
 }
 
-
 \let\blackTriangleright\blacktriangleright
 \let\blacktriangleright\blacktriangleleft
-
-
 
 \let\oldpgfpicture\pgfpicture
 \let\oldendpgfpicture\endpgfpicture
 
-\def\pgfpicture{\begingroup\textdir TLT\oldpgfpicture}
-\def\endpgfpicture{\oldendpgfpicture\endgroup}
+\def\pgfpicture{\babelsublr\bgroup\oldpgfpicture}
+\def\endpgfpicture{\oldendpgfpicture\egroup}
+
+\let\oldpgfuseshading\pgfuseshading
+\def\pgfuseshading#1{\babelsublr{\oldpgfuseshading{#1}}}
 
 %% beamerbasebox 
 
@@ -111,9 +111,9 @@
 	\vskip-0.5pt%
 	\fi%
 	\ifbmb@shadow%
-	\setbox\bmb@boxshadow=\hbox{\textdir TLT\pgfuseshading{bmb@shadow}}%
-	\setbox\bmb@boxshadowball=\hbox{\textdir TLT\pgfuseshading{bmb@shadowball}}%
-	\setbox\bmb@boxshadowballlarge=\hbox{\textdir TLT\pgfuseshading{bmb@shadowballlarge}}%
+	\setbox\bmb@boxshadow=\hbox{\pgfuseshading{bmb@shadow}}%
+	\setbox\bmb@boxshadowball=\hbox{\pgfuseshading{bmb@shadowball}}%
+	\setbox\bmb@boxshadowballlarge=\hbox{\pgfuseshading{bmb@shadowballlarge}}%
 	\fi%
 	\setbox\bmb@colorbox=\hbox{{\pgfpicturetrue\pgfsetcolor{lower.bg}}}%
 	\setbox\bmb@box=\hbox\bgroup\begin{minipage}[b]{\bmb@width}%
@@ -232,85 +232,6 @@
 }
 
 
-%% beamerbasecolor 
-
-\renewenvironment{beamercolorbox}[2][]{%
-	\def\beamer@vmode{\leavevmode}%
-	\setkeys{beamercolbox}{wd=\textwidth,ht={},dp={},%
-		leftskip=0pt,rightskip=0pt plus1fil,%
-		sep=0pt,colsep=0pt,colsep*=0pt,%
-		shadow=false,rounded=false,ignorebg=false}%
-	\setkeys{beamercolbox}{#1}%
-	\ifbeamercolorempty[bg]{#2}{\@tempswafalse}{\@tempswatrue}%
-	\ifbeamer@colbox@ignorebg\@tempswafalse\fi%
-	\def\beamer@colbox@color{#2}%
-	\setbox\beamer@tempbox=\hbox\bgroup\color@begingroup
-	\ifbeamer@colbox@ignorebg%
-	\colorlet{beamer@temp@color}{bg}%
-	\usebeamercolor[fg]{#2}%
-	\colorlet{bg}{beamer@temp@color}%
-	\else%
-	\usebeamercolor[fg]{#2}%
-	\fi%
-	\vbox\bgroup%
-	\hsize=\beamer@colbox@wd%
-	\@arrayparboxrestore%
-	\leftskip=\beamer@colbox@ls%
-	\ifdim\beamer@colbox@sep>\z@\advance\leftskip\beamer@colbox@sep\fi%
-	\rightskip=\beamer@colbox@rs%
-	\ifdim\beamer@colbox@sep>\z@\advance\rightskip\beamer@colbox@sep\fi%
-	\if@tempswa\ifdim\beamer@colbox@colsep>\z@%
-	\advance\leftskip by\beamer@colbox@colsep%
-	\advance\rightskip by\beamer@colbox@colsep%
-	\vskip\beamer@colbox@colsep%
-	\fi%
-	\ifdim\beamer@colbox@colseps>\z@\vskip\beamer@colbox@colseps\fi%
-	\fi%
-	\ifdim\beamer@colbox@sep>\z@\vskip\beamer@colbox@sep\fi%
-	\beamer@vmode\ignorespaces}{%
-	\ifdim\beamer@colbox@sep>\z@\vskip\beamer@colbox@sep\fi%
-	\if@tempswa
-	\ifdim\beamer@colbox@colsep>\z@\vskip\beamer@colbox@colsep\fi%
-	\ifdim\beamer@colbox@colseps>\z@\vskip\beamer@colbox@colseps\fi%
-	\fi%
-	\egroup\color@endgroup\egroup%
-	\ifx\beamer@colbox@ht\@empty\else\ht\beamer@tempbox=\beamer@colbox@ht\fi%
-	\ifx\beamer@colbox@dp\@empty\else\dp\beamer@tempbox=\beamer@colbox@dp\fi%
-	\ifbeamer@colbox@rounded%
-	\if@tempswa%
-	\begin{beamerboxesrounded}[%
-		shadow=\beamer@colbox@shadow,%
-		lower=\beamer@colbox@color,%
-		upper=normal text,%
-		width=\beamer@colbox@wd]{}%
-		\box\beamer@tempbox%
-	\end{beamerboxesrounded}%
-	\else%
-	\ifdim\wd\beamer@tempbox>\textwidth%
-	\setbox\beamer@tempbox=\hbox to\textwidth{\hss\box\beamer@tempbox\hss}%
-	\fi%
-	\box\beamer@tempbox%
-	\fi%
-	\else%
-	\if@tempswa\setbox\beamer@tempbox=\hbox{%
-		\usebeamercolor{\beamer@colbox@color}%
-		\hskip-\beamer@colbox@colseps%
-		\fboxsep=\z@\colorbox{bg}{%
-			\hskip\beamer@colbox@colseps%
-			\box\beamer@tempbox%
-			\hskip\beamer@colbox@colseps%
-		}%
-		\hskip-\beamer@colbox@colseps%
-	}\fi%
-	\ifdim\wd\beamer@tempbox>\textwidth%
-	\setbox\beamer@tempbox=\hbox to\textwidth{\hskip0pt minus\beamer@leftmargin\relax\box\beamer@tempbox\hskip0pt minus\beamer@leftmargin\relax}%
-	\fi%
-	\box\beamer@tempbox%
-	\fi%
-}
-
-
-
 %% beamerbaseauxtemplates
 
 
@@ -318,57 +239,6 @@
 
 \redefbeamertemplate{subsection in toc}{subsections numbered}
 {\leavevmode\leftskip=2em\rlap{\hskip-2em \inserttocsectionnumber\hbox{.}\inserttocsubsectionnumber}\inserttocsubsection\par}
-
-
-\redefbeamertemplate{section in toc}{ball unnumbered}
-{\leavevmode{\textdir TLT\raise0.1ex\beamer@usesphere{section number projected}{bigsphere}}\kern1.25ex\inserttocsection\par}
-
-\redefbeamertemplate{subsection in toc}{ball unnumbered}
-{\leavevmode\leftskip=1.5em{\textdir TLT\raise0.2ex\beamer@usesphere{subsection number projected}{smallsphere}}%
-	\kern1ex\inserttocsubsection\par}
-
-\redefbeamertemplate{subsubsection in toc}{ball unnumbered}
-{\leavevmode\normalsize\usebeamerfont{subsection in
-		toc}\leftskip=3em\usebeamerfont{subsubsection in toc}%
-	{\textdir TLT\beamer@usesphere{subsubsection number projected}{smallsphere}}%
-	\kern0.75ex\inserttocsubsubsection\par}
-
-% (sub-)section in toc: ball
-
-\redefbeamertemplate{section in toc}{ball unnumbered}
-{\leavevmode{\textdir TLT\raise0.1ex\beamer@usesphere{section number projected}{bigsphere}}\kern1.25ex\inserttocsection\par}
-
-\redefbeamertemplate{subsection in toc}{ball unnumbered}
-{\leavevmode\leftskip=1.5em{\textdir TLT\raise0.2ex\beamer@usesphere{subsection number projected}{smallsphere}}%
-	\kern1ex\inserttocsubsection\par}
-
-\redefbeamertemplate{subsubsection in toc}{ball unnumbered}
-{\leavevmode\normalsize\usebeamerfont{subsection in
-		toc}\leftskip=3em\usebeamerfont{subsubsection in toc}%
-	{\textdir TLT\beamer@usesphere{subsubsection number projected}{smallsphere}}%
-	\kern0.75ex\inserttocsubsubsection\par}
-
-
-% (sub-)section in toc: ball numbered
-
-\redefbeamertemplate{subsection in toc}{ball}
-{\leavevmode\leftskip=5ex%
-	\llap{{\textdir TLT\raise0.1ex\beamer@usesphere{subsection number projected}{bigsphere}}\kern1ex}%
-	\inserttocsubsection\par%
-}
-
-\redefbeamertemplate{subsubsection in toc}{ball}
-{\leavevmode\normalsize\usebeamerfont{subsection in
-		toc}\leftskip=7ex\usebeamerfont{subsubsection in toc}%
-	\llap{{\textdir TLT\beamer@usesphere{subsubsection number projected}{bigsphere}}\kern0.75ex}%
-	\inserttocsubsubsection\par%
-}
-
-% Itemize items, ball
-
-\redefbeamertemplate{itemize item}{ball}{\textdir TLT\raise0.2pt\beamer@usesphere{item projected}{bigsphere}}
-\redefbeamertemplate{itemize subitem}{ball}{\textdir TLT\raise0.2pt\beamer@usesphere{subitem projected}{smallsphere}}
-\redefbeamertemplate{itemize subsubitem}{ball}{\textdir TLT\raise0.2pt\beamer@usesphere{subsubitem projected}{smallsphere}}
 
 
 %% beamerinnerthemedefault
@@ -543,6 +413,9 @@
 			\dp\@tempboxa=0pt%
 			\setbox\beamer@framebox=\vbox to\beamer@frametextheight{{%
 					\ifbeamer@plainframe\beamer@leftmargin=\Gm@lmargin\fi%
+					\let\pgfpicture\oldpgfpicture
+					\let\endpgfpicture\oldendpgfpicture
+					\textdir TLT
 					\begin{pgfpicture}{\beamer@leftmargin}{-\beamer@frametextheight}{\beamer@leftmargin}{0pt}
 						\pgftext[left,top]{\box\@tempboxa}
 						\pgfpathrectangle{\pgfpoint{-\@tempdimb}{-\@tempdimc}}{\pgfpoint{\@tempdimb}{\@tempdimc}}%
@@ -561,7 +434,7 @@
 				\nobreak\vbox{}\nobreak\par\nobreak\beamer@entrycode\nobreak%
 				\nointerlineskip\unvbox\beamer@frametitlebox%
 				\nobreak%
-				\box\beamer@framebox%
+				\box\beamer@framebox %
 				\nobreak%
 				\vss%
 				\beamer@exitcode%
