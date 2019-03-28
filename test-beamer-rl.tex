@@ -4,7 +4,6 @@
 \usepackage[nil,bidi=basic-r,layout=counters]{babel}
 \babelprovide[import=ar-DZ, main]{arabic}
 \babelprovide[import,language=Default]{english}
-\babelfont{rm}{Amiri}
 \babelfont{sf}{Amiri}
 
 
@@ -58,10 +57,11 @@
 }
 
 
-\date{{\selectlanguage{english}\today}}
+\date{{\selectlanguage{english} \today}}
 
 \setbeamercovered{transparent=10}
 \newtheorem*{thm}{نظرية.}
+
 
 \begin{document}
 
@@ -74,7 +74,7 @@
 \tableofcontents
 \end{frame}
 
-\section{Introduction}
+\section{مدخل}
 
 \begin{frame}[fragile]
 \frametitle{Introduction}
@@ -110,7 +110,6 @@ The \hologo{LuaTeX} team set solutions for  these issues thanks to them and to \
 
 \section{Examples}
 \subsection{Blocks}
-
 
 \begin{frame}[fragile]
 \frametitle{Blocks}
@@ -199,12 +198,18 @@ number not in the first $p$ numbers.\qedhere
 
 \subsection{zooming}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{zooming}
 
 \framezoom<1><2>[border=2](2cm,2cm)(2cm,2cm)
 \pgfimage[height=5cm]{example-image}
 
+\selectlanguage{nil}
+
+\begin{verbatim}
+\framezoom<1><2>[border=2](2cm,2cm)(2cm,2cm)
+\pgfimage[height=5cm]{example-image}
+\end{verbatim}
 \end{frame}
 
 \section{Some notes}
@@ -219,8 +224,7 @@ The insertion of the package \verb:beamer-rl: with \verb:\usepackage{beamer-rl}:
 The \verb:beamer-rl: package modify the definition of \verb:\blacktriangleright: so it have the same meaning as\verb:\blacktriangleleft:, if you need to use the original command you can use \verb:\blackTriangleright:
 \item
 In some cases you  need to use \verb:\babelsublr: command from \verb:bebel: 
-package to insert a left to right text within your right to left text, or you can use the \hologo{LuaTeX} command
-\verb:\textdir TLT: to change direction of text     
+package to insert a left to right text within your right to left text.
 \end{itemize}
 
 \end{frame}
